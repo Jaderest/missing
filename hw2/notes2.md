@@ -26,3 +26,5 @@ bash macro.sh
     - g代表global，即替换所有匹配
     - 把g删掉就只替换第一个匹配
     - sed默认情况下一次只处理一行
+
+## xargs: build and execute command lines from standard input
