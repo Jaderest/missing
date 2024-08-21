@@ -14,8 +14,28 @@ macro() {
 }
 
 polo() {
-  #todo 记得最后要cd到那个目录
   cd "$MACRO_PATH"
-  #TODO: 查手册看tail的返回值，然后如果没有文件，则提示一下未使用macro，有返回值则输出or进入目录
-  
+  dir_path=$(tail -n 1 macro.txt) 2> /dev/null
+  # check if the macro has been used
+  if [ -z "$dir_path" ]; then
+    echo "You haven't used macro yet."
+    $(exit 1)
+  else
+    echo cd" $dir_path"
+    cd "$dir_path"
+  fi
+}
+
+macro_history() {
+  if [ -f "${MACRO_PATH}"/macro.txt ]; then
+    cat "${MACRO_PATH}"/macro.txt
+  else
+    echo "You haven't used macro yet."
+  fi
+}
+
+macro_clear() {
+  if [ -f "${MACRO_PATH}"/macro.txt ]; then
+    rm "${MACRO_PATH}"/macro.txt
+  fi
 }
